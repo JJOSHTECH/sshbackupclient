@@ -21,6 +21,3 @@ ENV PORT="22"
 
 # Start SSH Server in Debug mode
 CMD ["cron","-f"]
-
-# Expose ssh Port
-EXPOSE 22
