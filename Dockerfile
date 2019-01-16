@@ -22,6 +22,12 @@ ENV SLACK_HOOK=""
 #Copy Cronjob File into Container
 COPY cronjob /etc/cron.d/cronjob
 
+#Copy Cronscript File into Container
+COPY cronscript /home/cronscript
+
+#Add Executable right to cronscript
+RUN chmod +x /home/cronscript
+
 #Include cronjob into crontab
 RUN crontab /etc/cron.d/cronjob
 
