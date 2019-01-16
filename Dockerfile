@@ -8,7 +8,7 @@ COPY qemu-arm-static /usr/bin
 RUN apt update && apt full-upgrade -y && apt autoremove && apt clean
 
 # Install rsync and opsenssh
-RUN apt install rsync cron -y
+RUN apt install openssh-client rsync cron -y
 
 # Create Volume for Certs
 VOLUME ["/root/.ssh/"]
