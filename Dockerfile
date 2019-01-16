@@ -19,5 +19,11 @@ VOLUME ["/var/backup/"]
 ENV SERVER_ADDRESS="localhost"
 ENV PORT="22"
 
+#Copy Cronjob File into Container
+COPY cronjob /etc/cron.d/cronjob
+
+#Include cronjob into crontab
+RUN crontab /etc/cron.d/cronjob
+
 # Start SSH Server in Debug mode
 CMD ["cron","-f"]
