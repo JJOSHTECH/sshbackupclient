@@ -35,7 +35,7 @@ RUN chmod +x /root/cronScript.sh
 RUN crontab /etc/cron.d/cronjob
 
 # Set Environment for corn
-CMD env >> /etc/default/cron
+CMD ["env",">>","/etc/default/cron"]
 
 # Start SSH Server in Debug mode
 CMD ["cron","-f"]
