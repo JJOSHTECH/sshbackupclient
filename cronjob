@@ -1,1 +1,1 @@
-0 * * * * /root/cronScript.sh
+0 * * * * /root/cronScript.sh 2>&1
