@@ -34,8 +34,11 @@ RUN chmod +x /root/cronScript.sh
 #Include cronjob into crontab
 RUN crontab /etc/cron.d/cronjob
 
-# Set Environment for corn
-CMD ["env",">>","/etc/default/cron"]
+#Copy Cronscript File into Container
+COPY startUp.sh /root/startUp.sh
+
+#Add Executable right to cronscript
+RUN chmod +x /root/startUp.sh
 
 # Start SSH Server in Debug mode
-CMD ["cron","-f"]
+CMD ["/root/startUp.sh"]
