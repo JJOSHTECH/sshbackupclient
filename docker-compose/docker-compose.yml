@@ -1,0 +1,31 @@
+version: '3.6'
+volumes:
+        certs-volume:
+                driver_opts:
+                        type: "none"
+                        device: "/path/"
+                        o: "bind"
+        conf-volume:
+                driver_opts:
+                        type: "none"
+                        device: "/path/"
+                        o: "bind"
+        backup-volume:
+                driver_opts:
+                        type: "none"
+                        device: "/path/"
+                        o: "bind"
+services:
+        sshbackupclient:
+                image: "jjoshtech/sshbackupclient:armhf"
+                container_name: "sshbackupclient"
+                hostname: "sshbackupclient"
+                environment:
+                  SERVER_ADDRESS: "localhost"
+                  PORT: "22"
+                  SLACK_HOOK: "https://localhost"
+                volumes:
+                  - "certs-volume:/root/.ssh"
+                  - "conf-volume:/etc/ssh/"
+                  - "backup-volume:/var/backup"
+                restart: "unless-stopped"
