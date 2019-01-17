@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 echo "$(date +%Y-%m-%d\ %H:%M) Backup Started" >> /var/log/cron.log 2>&1
 curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Started"}' $SLACK_HOOK >> /var/log/cron.log 2>&1
 
