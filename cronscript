@@ -1,8 +1,10 @@
+#!/bin/bash
 
-echo "$(date +%Y-%m-%d\ %H:%M) Backup Started" >> /dev/stdout 2>&1
-curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Started\n'"$(df -h /var/backup/)"'"}' $SLACK_HOOK >> /dev/stdout 2>&1
+echo "$(date +%Y-%m-%d\ %H:%M) Backup Started"
+curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Started\n'"$(df -h /var/backup/)"'"}' $SLACK_HOOK
 
-rsync -vaze "ssh -p $PORT" root@$SERVER_ADDRESS:/var/backup/ /var/backup/ >> /dev/stdout 2>&1
+rsyncOutput="$(rsync -vaze "ssh -p $PORT" root@$SERVER_ADDRESS:/var/backup/ /var/backup/  | sed '0,/^$/d')"
+echo "$(date +%Y-%m-%d\ %H:%M) $rsyncOutput"
 
-echo "$(date +%Y-%m-%d\ %H:%M) Backup Started" >> /dev/stdout 2>&1
-curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Finished\n'"$(df -h /var/backup/)"'"}' $SLACK_HOOK >> /dev/stdout 2>&1
+echo "$(date +%Y-%m-%d\ %H:%M) Backup Started"
+curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Finished\n'"$(df -h /var/backup/)"'\n'$rsyncOutput'"}' $SLACK_HOOK
