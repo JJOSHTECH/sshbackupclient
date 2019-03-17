@@ -3,7 +3,7 @@
 echo "$(date +%d.%m.%Y\ %H:%M) Backup Started"
 curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Started\n'"$(df -h /var/backup/)"'"}' $SLACK_HOOK
 
-rsyncOutput="$(rsync -vaze "ssh -p $PORT" root@$SERVER_ADDRESS:/var/backup/ /var/backup/  | sed '0,/^$/d')"
+rsyncOutput=$(rsync -vaze "ssh -p $PORT" root@$SERVER_ADDRESS:/var/backup/ /var/backup/  | sed '0,/^$/d')
 echo "$(date +%d.%m.%Y\ %H:%M) $rsyncOutput"
 
 echo "$(date +%d.%m.%Y\ %H:%M) Backup Started"
