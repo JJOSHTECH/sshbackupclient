@@ -32,7 +32,7 @@ COPY cronscript /root/cronScript.sh
 COPY startUp.sh /root/startUp.sh
 
 #Add Executable right to startUp.sh
-RUN chmod +x /root/cronScript.sh
+RUN chmod +x /root/startUp.sh
 
 # Set Entrypoint for Cron Deamon
 ENTRYPOINT ["/root/startUp.sh"]
