@@ -6,5 +6,5 @@ curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Starte
 rsyncOutput=$(rsync -vaze "ssh -p $PORT" root@$SERVER_ADDRESS:/var/backup/ /var/backup/  | sed '0,/^$/d')
 echo "$(date +%d.%m.%Y\ %H:%M) $rsyncOutput"
 
-echo "$(date +%d.%m.%Y\ %H:%M) Backup Started"
-curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Finished\n'"$(df -h /var/backup/)"'\n'$rsyncOutput'"}' $SLACK_HOOK
+echo "$(date +%d.%m.%Y\ %H:%M) Backup Finished"
+curl -sX POST -H 'Content-type: application/json' --data '{"text":"Backup Finished\n'"$(df -h /var/backup/)"'\n'"$rsyncOutput"'"}' $SLACK_HOOK
