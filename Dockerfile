@@ -5,7 +5,7 @@ FROM arm32v7/debian:latest
 COPY qemu-arm-static /usr/bin
 
 # Update and Upgrade Repo
-RUN apt update && apt full-upgrade -y && apt autoremove && apt-cache clean
+RUN apt update && apt full-upgrade -y && apt autoremove && apt clean
 
 # Install rsync and opsenssh
 RUN apt install openssh-client rsync cron curl sed -y
