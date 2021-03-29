@@ -5,7 +5,7 @@ FROM debian:stretch-slim
 RUN apt update && apt full-upgrade -y && apt autoremove && apt clean
 
 # Install rsync and opsenssh
-RUN apt install openssh-client rsync cron curl -y
+RUN apt install openssh-client rsync cron curl procps -y
 
 # Create Volume for Certs
 VOLUME ["/root/.ssh/"]
